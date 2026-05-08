@@ -1,14 +1,12 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
 
 import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
-import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
-import { imageHero1 } from './image-hero-1'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { seedTimbitSports } from './timbit-sports'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -83,7 +81,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding media...`)
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
+  const [image1Buffer, image2Buffer, image3Buffer] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-post1.webp',
     ),
@@ -93,12 +91,9 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-post3.webp',
     ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-hero1.webp',
-    ),
   ])
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
+  const [demoAuthor, image1Doc, image2Doc, image3Doc] = await Promise.all([
     payload.create({
       collection: 'users',
       data: {
@@ -122,12 +117,7 @@ export const seed = async ({
       data: image2,
       file: image3Buffer,
     }),
-    payload.create({
-      collection: 'media',
-      data: imageHero1,
-      file: hero1Buffer,
-    }),
-    categories.map((category) =>
+    ...categories.map((category) =>
       payload.create({
         collection: 'categories',
         data: {
@@ -194,26 +184,25 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding contact form...`)
 
-  const contactForm = await payload.create({
+  await payload.create({
     collection: 'forms',
     depth: 0,
     data: contactFormData,
   })
 
-  payload.logger.info(`— Seeding pages...`)
+  // Note: legacy 'home' and 'contact-page' seeds were removed because they
+  // referenced block configs (Content, MediaBlock, FormBlock, Archive) that
+  // are no longer part of the static-page block registry. The home page is
+  // a hand-built React landing at /[locale]/page.tsx, and static campaign
+  // pages are authored in the admin.
 
-  const [_, contactPage] = await Promise.all([
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
-    }),
-  ])
+  await seedTimbitSports({
+    payload,
+    req,
+    hockeyImage: image1Doc,
+    soccerImage: image2Doc,
+    preheaderImage: image3Doc,
+  })
 
   payload.logger.info(`— Seeding globals...`)
 
@@ -225,18 +214,15 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Posts',
-              url: '/posts',
+              label: 'Static Pages',
+              url: '/en/static-pages',
             },
           },
           {
             link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
-              },
+              type: 'custom',
+              label: 'Block Library',
+              url: '/en/blocks',
             },
           },
         ],

@@ -1,5 +1,6 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import { redirect } from 'next/navigation'
+import { DEFAULT_LOCALE } from '@/utilities/locale'
 
-export default PageTemplate
-
-export { generateMetadata }
+export default function RootPage() {
+  redirect(`/${DEFAULT_LOCALE}`)
+}

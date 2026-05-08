@@ -1,5 +1,6 @@
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/utilities/ui'
+import { DEFAULT_LOCALE, type Locale } from '@/utilities/locale'
 import Link from 'next/link'
 import React from 'react'
 
@@ -10,6 +11,8 @@ type CMSLinkType = {
   children?: React.ReactNode
   className?: string
   label?: string | null
+  /** Locale to use when resolving reference links to pages. Defaults to the default locale. */
+  locale?: Locale
   newTab?: boolean | null
   reference?: {
     relationTo: 'pages' | 'posts'
@@ -27,18 +30,23 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     children,
     className,
     label,
+    locale = DEFAULT_LOCALE,
     newTab,
     reference,
     size: sizeFromProps,
     url,
   } = props
 
-  const href =
-    type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
-      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${
-          reference.value.slug
-        }`
-      : url
+  let href: string | null | undefined
+  if (type === 'reference' && typeof reference?.value === 'object' && reference.value.slug) {
+    if (reference.relationTo === 'pages') {
+      href = `/${locale}/${reference.value.slug}`
+    } else {
+      href = `/${reference.relationTo}/${reference.value.slug}`
+    }
+  } else {
+    href = url
+  }
 
   if (!href) return null
 
