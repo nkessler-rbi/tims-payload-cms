@@ -1,0 +1,1 @@
+/Users/RBINK017/projects/work/payload-cms-marketing-prototype/node_modules/@embedded-postgres/darwin-arm64/native/bin/postgres "-D" "./.embedded-postgres" "-p" "5432"
