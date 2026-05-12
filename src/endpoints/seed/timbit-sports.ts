@@ -66,17 +66,28 @@ export const seedTimbitSports = async ({
       blockType: 'doubleImage',
       anchorId: 'hockey',
       card1: {
+        image: null,
+        heading: 'Our commitment',
+        body: 'Tim Hortons is proud to sponsor youth sports in communities across Canada.',
+        link: { type: 'custom', label: 'About the program', url: '/en/timbits-sports' },
+      },
+      card2: {
         image: hockeyImage.id,
         heading: 'Timbits Hockey',
         body: 'Tim Hortons is proud to sponsor youth hockey teams across Canada.',
         link: { type: 'custom', label: 'Learn more', url: '/en/timbits-hockey' },
       },
-      card2: {
-        image: soccerImage.id,
-        heading: 'Timbits Soccer',
-        body: 'Tim Hortons is proud to sponsor youth soccer teams across Canada.',
-        link: { type: 'custom', label: 'Learn more', url: '/en/timbits-soccer' },
-      },
+    },
+    {
+      blockType: 'textWithImage',
+      anchorId: 'soccer',
+      mediaPosition: 'left',
+      richText: lexicalWithHeading('Timbits Soccer', [
+        'Tim Hortons is proud to sponsor youth soccer teams across Canada. Players receive jerseys, socks, shorts, soccer balls and medals — everything they need to learn the game.',
+      ]),
+      media: soccerImage.id,
+      enableCta: true,
+      link: { type: 'custom', label: 'Learn more', url: '/en/timbits-soccer', appearance: 'default' },
     },
     {
       blockType: 'richTextBlock',
@@ -174,17 +185,28 @@ export const seedTimbitSports = async ({
       blockType: 'doubleImage',
       anchorId: 'hockey',
       card1: {
+        image: null,
+        heading: 'Notre engagement',
+        body: 'Tim Hortons est fier de commanditer le sport junior dans des communautés partout au Canada.',
+        link: { type: 'custom', label: 'À propos du programme', url: '/fr/sports-timbits' },
+      },
+      card2: {
         image: hockeyImage.id,
         heading: 'Hockey Timbits',
         body: 'Tim Hortons est fier de commanditer les équipes de hockey junior partout au Canada.',
         link: { type: 'custom', label: 'En savoir plus', url: '/fr/hockey-timbits' },
       },
-      card2: {
-        image: soccerImage.id,
-        heading: 'Soccer Timbits',
-        body: 'Tim Hortons est fier de commanditer les équipes de soccer junior partout au Canada.',
-        link: { type: 'custom', label: 'En savoir plus', url: '/fr/soccer-timbits' },
-      },
+    },
+    {
+      blockType: 'textWithImage',
+      anchorId: 'soccer',
+      mediaPosition: 'left',
+      richText: lexicalWithHeading('Soccer Timbits', [
+        'Tim Hortons est fier de commanditer les équipes de soccer junior partout au Canada. Les joueurs reçoivent chandails, bas, shorts, ballons de soccer et médailles — tout ce qu’il faut pour apprendre.',
+      ]),
+      media: soccerImage.id,
+      enableCta: true,
+      link: { type: 'custom', label: 'En savoir plus', url: '/fr/soccer-timbits', appearance: 'default' },
     },
     {
       blockType: 'richTextBlock',

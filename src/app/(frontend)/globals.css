@@ -43,8 +43,10 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
-  --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-display), 'Helvetica Neue', Arial, sans-serif;
+  --font-display-bold: var(--font-display-bold), 'Helvetica Neue', Arial, sans-serif;
 }
 
 @layer utilities {
@@ -87,77 +89,98 @@
 }
 
 :root {
-  --background: oklch(100% 0 0deg);
-  --foreground: oklch(14.5% 0 0deg);
-  --card: oklch(96.5% 0.005 265deg);
-  --card-foreground: oklch(14.5% 0 0deg);
-  --popover: oklch(100% 0 0deg);
-  --popover-foreground: oklch(14.5% 0 0deg);
-  --primary: oklch(20.5% 0 0deg);
-  --primary-foreground: oklch(98.5% 0 0deg);
-  --secondary: oklch(97% 0 0deg);
-  --secondary-foreground: oklch(20.5% 0 0deg);
-  --muted: oklch(97% 0 0deg);
-  --muted-foreground: oklch(55.6% 0 0deg);
-  --accent: oklch(97% 0 0deg);
-  --accent-foreground: oklch(20.5% 0 0deg);
+  /* Tim Hortons brand tokens */
+  --th-red: #c80f2e;
+  --th-red-dark: #a90d26;
+  --th-red-ink: #6b0918;
+  --th-cream: #fbf6ef;
+  --th-cream-soft: #f4ecdf;
+  --th-espresso: #2a1a12;
+  --th-espresso-soft: #4a3327;
+  --th-ink: #1a120c;
+  --th-muted: #6b5d52;
+  --th-rule: #e6dccc;
+  --th-rule-strong: #c9b9a3;
+
+  /* Layout tokens */
+  --section-y: clamp(56px, 7vw, 96px);
+  --section-y-compact: clamp(36px, 4.5vw, 64px);
+  --gutter: clamp(20px, 4vw, 56px);
+  --max-w: 1180px;
+  --th-radius: 4px;
+
+  /* shadcn role tokens remapped to brand */
+  --background: #ffffff;
+  --foreground: var(--th-ink);
+  --card: var(--th-cream-soft);
+  --card-foreground: var(--th-red-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--th-ink);
+  --primary: var(--th-red);
+  --primary-foreground: #ffffff;
+  --secondary: var(--th-cream-soft);
+  --secondary-foreground: var(--th-espresso);
+  --muted: var(--th-cream-soft);
+  --muted-foreground: var(--th-muted);
+  --accent: var(--th-red);
+  --accent-foreground: #ffffff;
   --destructive: oklch(57.7% 0.245 27.325deg);
-  --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(92.2% 0 0deg);
-  --input: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
-  --chart-1: oklch(64.6% 0.222 41.116deg);
-  --chart-2: oklch(60% 0.118 184.704deg);
-  --chart-3: oklch(39.8% 0.07 227.392deg);
-  --chart-4: oklch(82.8% 0.189 84.429deg);
-  --chart-5: oklch(76.9% 0.188 70.08deg);
-  --radius: 0.625rem;
-  --sidebar: oklch(98.5% 0 0deg);
-  --sidebar-foreground: oklch(14.5% 0 0deg);
-  --sidebar-primary: oklch(20.5% 0 0deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(97% 0 0deg);
-  --sidebar-accent-foreground: oklch(20.5% 0 0deg);
-  --sidebar-border: oklch(92.2% 0 0deg);
-  --sidebar-ring: oklch(70.8% 0 0deg);
+  --destructive-foreground: #ffffff;
+  --border: var(--th-rule);
+  --input: var(--th-rule);
+  --ring: var(--th-red);
+  --chart-1: var(--th-red);
+  --chart-2: var(--th-espresso);
+  --chart-3: var(--th-cream-soft);
+  --chart-4: var(--th-rule-strong);
+  --chart-5: var(--th-muted);
+  --radius: 0.25rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--th-ink);
+  --sidebar-primary: var(--th-red);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--th-cream-soft);
+  --sidebar-accent-foreground: var(--th-espresso);
+  --sidebar-border: var(--th-rule);
+  --sidebar-ring: var(--th-red);
   --success: oklch(78% 0.08 200deg);
   --warning: oklch(89% 0.1 75deg);
   --error: oklch(75% 0.15 25deg);
 }
 
 [data-theme='dark'] {
-  --background: oklch(14.5% 0 0deg);
-  --foreground: oklch(98.5% 0 0deg);
-  --card: oklch(17% 0 0deg);
-  --card-foreground: oklch(98.5% 0 0deg);
-  --popover: oklch(14.5% 0 0deg);
-  --popover-foreground: oklch(98.5% 0 0deg);
-  --primary: oklch(98.5% 0 0deg);
-  --primary-foreground: oklch(20.5% 0 0deg);
-  --secondary: oklch(26.9% 0 0deg);
-  --secondary-foreground: oklch(98.5% 0 0deg);
-  --muted: oklch(26.9% 0 0deg);
-  --muted-foreground: oklch(70.8% 0 0deg);
-  --accent: oklch(26.9% 0 0deg);
-  --accent-foreground: oklch(98.5% 0 0deg);
+  --background: var(--th-ink);
+  --foreground: var(--th-cream-soft);
+  --card: var(--th-espresso);
+  --card-foreground: var(--th-cream-soft);
+  --popover: var(--th-espresso);
+  --popover-foreground: var(--th-cream-soft);
+  --primary: var(--th-red);
+  --primary-foreground: #ffffff;
+  --secondary: var(--th-espresso);
+  --secondary-foreground: var(--th-cream-soft);
+  --muted: var(--th-espresso);
+  --muted-foreground: var(--th-rule-strong);
+  --accent: var(--th-red);
+  --accent-foreground: #ffffff;
   --destructive: oklch(39.6% 0.141 25.723deg);
-  --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(26.9% 0 0deg);
-  --input: oklch(26.9% 0 0deg);
-  --ring: oklch(43.9% 0 0deg);
-  --chart-1: oklch(48.8% 0.243 264.376deg);
-  --chart-2: oklch(69.6% 0.17 162.48deg);
-  --chart-3: oklch(76.9% 0.188 70.08deg);
-  --chart-4: oklch(62.7% 0.265 303.9deg);
-  --chart-5: oklch(64.5% 0.246 16.439deg);
-  --sidebar: oklch(20.5% 0 0deg);
-  --sidebar-foreground: oklch(98.5% 0 0deg);
-  --sidebar-primary: oklch(48.8% 0.243 264.376deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(26.9% 0 0deg);
-  --sidebar-accent-foreground: oklch(98.5% 0 0deg);
-  --sidebar-border: oklch(26.9% 0 0deg);
-  --sidebar-ring: oklch(43.9% 0 0deg);
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: var(--th-red);
+  --chart-1: var(--th-red);
+  --chart-2: var(--th-cream-soft);
+  --chart-3: var(--th-espresso-soft);
+  --chart-4: var(--th-rule-strong);
+  --chart-5: var(--th-muted);
+  --sidebar: var(--th-espresso);
+  --sidebar-foreground: var(--th-cream-soft);
+  --sidebar-primary: var(--th-red);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--th-espresso-soft);
+  --sidebar-accent-foreground: var(--th-cream-soft);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: var(--th-red);
   --success: oklch(28% 0.1 200deg);
   --warning: oklch(35% 0.08 70deg);
   --error: oklch(45% 0.1 25deg);
@@ -203,6 +226,19 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+
+  /* Brand-namespaced color utilities (bg-th-red, text-th-espresso, etc.) */
+  --color-th-red: var(--th-red);
+  --color-th-red-dark: var(--th-red-dark);
+  --color-th-red-ink: var(--th-red-ink);
+  --color-th-cream: var(--th-cream);
+  --color-th-cream-soft: var(--th-cream-soft);
+  --color-th-espresso: var(--th-espresso);
+  --color-th-espresso-soft: var(--th-espresso-soft);
+  --color-th-ink: var(--th-ink);
+  --color-th-muted: var(--th-muted);
+  --color-th-rule: var(--th-rule);
+  --color-th-rule-strong: var(--th-rule-strong);
 }
 
 @layer base {
@@ -211,6 +247,82 @@
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Block-level shared typography for Lexical-rendered RichText output */
+@layer components {
+  .b-richtext h2 {
+    font-family: var(--font-display-bold);
+    font-weight: 600;
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--th-espresso);
+    max-width: 22ch;
+    margin: 0 0 0.6em;
+  }
+  .b-richtext p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--th-espresso-soft);
+    max-width: 60ch;
+    margin: 0 0 1em;
+  }
+  .b-richtext ul {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .b-richtext ul li {
+    position: relative;
+    padding-left: 34px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--th-espresso);
+  }
+  .b-richtext ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>")
+      center / 14px no-repeat var(--th-red);
+  }
+  [data-theme='dark'] .b-richtext h2 {
+    color: var(--th-cream-soft);
+  }
+  [data-theme='dark'] .b-richtext p,
+  [data-theme='dark'] .b-richtext ul li {
+    color: var(--th-rule-strong);
+  }
+
+  /* CTA's red panel inverts the brand typography */
+  .b-cta .b-cta-text h1,
+  .b-cta .b-cta-text h2,
+  .b-cta .b-cta-text h3 {
+    font-family: var(--font-display-bold);
+    font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #fff;
+    margin: 0 0 0.5em;
+  }
+  .b-cta .b-cta-text p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 16.5px;
+    line-height: 1.55;
+    max-width: 44ch;
+    margin: 0;
   }
 }
 

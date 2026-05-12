@@ -1,9 +1,39 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
+import localFont from 'next/font/local'
+import { JetBrains_Mono, Manrope } from 'next/font/google'
 import React from 'react'
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const sofiaProBold = localFont({
+  src: [
+    { path: '../../../public/fonts/sofia_pro_bold.woff2', weight: '700', style: 'normal' },
+    { path: '../../../public/fonts/sofia_pro_bold.woff', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-display-bold',
+  display: 'swap',
+})
+
+const sofiaProBlack = localFont({
+  src: [
+    { path: '../../../public/fonts/sofia_pro_black.woff2', weight: '900', style: 'normal' },
+    { path: '../../../public/fonts/sofia_pro_black.woff', weight: '900', style: 'normal' },
+  ],
+  variable: '--font-display',
+  display: 'swap',
+})
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
@@ -20,7 +50,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(
+        manrope.variable,
+        jetbrainsMono.variable,
+        sofiaProBold.variable,
+        sofiaProBlack.variable,
+      )}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

@@ -25,17 +25,21 @@ export const LocaleSwitcher: React.FC = () => {
   const currentLocale: Locale = isValidLocale(firstSegment) ? firstSegment : DEFAULT_LOCALE
 
   return (
-    <div className="flex items-center gap-1 text-sm" aria-label="Language switcher">
+    <div
+      className="flex items-center gap-1 text-white font-mono"
+      style={{ fontSize: '11px', letterSpacing: '0.05em' }}
+      aria-label="Language switcher"
+    >
       {LOCALES.map((locale, idx) => {
         const isActive = locale === currentLocale
         return (
           <React.Fragment key={locale}>
-            {idx > 0 && <span className="opacity-40">|</span>}
+            {idx > 0 && <span className="opacity-40">/</span>}
             <Link
               href={swapLocaleInPath(pathname, locale)}
               className={cn(
-                'uppercase px-1 hover:underline',
-                isActive ? 'font-semibold' : 'opacity-70',
+                'uppercase px-1 transition-opacity',
+                isActive ? 'opacity-100 font-bold' : 'opacity-85 hover:opacity-100',
               )}
               aria-current={isActive ? 'true' : undefined}
             >
