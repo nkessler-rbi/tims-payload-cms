@@ -79,34 +79,15 @@ const ImageCard: React.FC<{ card: Card }> = ({ card }) => (
     className="relative overflow-hidden"
     style={{
       aspectRatio: '4 / 3',
-      borderRadius: 'var(--th-radius)',
+      borderRadius: '12px',
       background: 'var(--th-cream-soft)',
+      border: '1px solid var(--th-rule)',
     }}
   >
     <BlockMedia
       resource={card.image}
       imgClassName="absolute inset-0 w-full h-full object-cover"
     />
-    <div
-      aria-hidden
-      className="absolute inset-0 pointer-events-none"
-      style={{
-        background:
-          'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.55) 100%)',
-      }}
-    />
-    <span
-      className="absolute font-display-bold text-white whitespace-nowrap"
-      style={{
-        left: 24,
-        bottom: 22,
-        fontWeight: 600,
-        fontSize: 'clamp(26px, 3vw, 40px)',
-        textShadow: '0 2px 14px rgba(0,0,0,0.3)',
-      }}
-    >
-      {card.heading}
-    </span>
   </div>
 )
 

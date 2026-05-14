@@ -53,7 +53,7 @@ export const TextWithImageBlockComponent: React.FC<TextWithImageBlockProps> = ({
   const mediaCol = (
     <div
       className="relative overflow-hidden bg-th-cream-soft"
-      style={{ aspectRatio: '5 / 4', borderRadius: 'var(--th-radius)' }}
+      style={{ aspectRatio: '5 / 4', borderRadius: '12px' }}
     >
       <BlockMedia
         resource={media}

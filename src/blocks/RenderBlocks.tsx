@@ -27,9 +27,11 @@ export const RenderBlocks: React.FC<{
         const Block = entry.Component
 
         return (
-          <div className="my-8" key={index}>
-            <Block {...(block as unknown as Record<string, unknown>)} locale={locale} />
-          </div>
+          <Block
+            key={index}
+            {...(block as unknown as Record<string, unknown>)}
+            locale={locale}
+          />
         )
       })}
     </Fragment>
