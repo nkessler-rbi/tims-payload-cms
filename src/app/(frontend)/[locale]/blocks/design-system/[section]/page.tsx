@@ -53,7 +53,7 @@ export default async function DesignSystemSectionPage({ params: paramsPromise }:
         <p className="text-xs uppercase tracking-widest text-muted-foreground font-mono">
           {entry.slug}
         </p>
-        <h1 className="text-4xl font-bold mt-2">{label}</h1>
+        <h1 className="th-h1 mt-2">{label}</h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">{description}</p>
       </header>
 

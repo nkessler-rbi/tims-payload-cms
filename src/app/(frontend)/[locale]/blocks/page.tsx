@@ -37,7 +37,7 @@ export default async function BlockLibrary({ params: paramsPromise }: Args) {
         <p className="text-sm uppercase tracking-widest text-muted-foreground">
           {ROUTE_TITLE[locale]}
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold mt-2">
+        <h1 className="th-h1 mt-2">
           {locale === 'fr' ? 'Le système de design Tim Hortons' : 'The Tim Hortons design system'}
         </h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">

@@ -253,6 +253,34 @@
 
 /* Block-level shared typography for Lexical-rendered RichText output */
 @layer components {
+  /*
+   * Runtime utility classes that apply the DESIGN.md `typography.h1` / `.h2` /
+   * `.h3` tokens to non-richtext page contexts (app-route headings, dashboards,
+   * etc.). Sizes use the same fluid clamp() formulas the Tailwind typography
+   * plugin uses inside `.b-richtext`, so a page H1 and a Lexical H1 render at
+   * the same scale. See DESIGN.md § Typography.
+   */
+  .th-h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(36px, 5.5vw, 70px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .th-h2 {
+    font-family: var(--font-display-bold);
+    font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  .th-h3 {
+    font-family: var(--font-display-bold);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.1;
+  }
+
   .b-richtext h2 {
     font-family: var(--font-display-bold);
     font-weight: 600;

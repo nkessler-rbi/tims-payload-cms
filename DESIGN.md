@@ -163,6 +163,8 @@ The typography stack pairs **Sofia Pro** (display, hero) with **Manrope** (body)
 
 Local font files (Sofia Pro variants) live in `public/fonts/` and are loaded via `next/font/local` in `src/app/(frontend)/layout.tsx`. Manrope and JetBrains Mono are loaded from Google Fonts.
 
+**Runtime utility classes.** For page-level headings (anywhere outside `.b-richtext` Lexical content), use the utility classes `.th-h1`, `.th-h2`, `.th-h3` defined in [src/app/(frontend)/globals.css](src/app/(frontend)/globals.css). They apply the `h1` / `h2` / `h3` typography tokens above directly — same font family, weight, fluid `clamp()` size, line-height, and letter-spacing — so app-route pages get the brand display headings with a single class instead of reassembling the values from Tailwind utilities each time. The Lexical-rendered `.b-richtext h2/h3` styles cover the same tokens inside CMS-authored content; the `.th-*` utilities cover the non-CMS, app-route equivalent.
+
 ## Layout & Spacing
 
 The layout follows a **fluid container** model: a max content width of 1180px, with horizontal gutters that shrink on small viewports and expand on large ones.
