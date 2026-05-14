@@ -8,6 +8,7 @@ type Card = {
   image: any
   heading: string
   body?: string | null
+  enableCta?: boolean | null
   link?: {
     type?: 'custom' | 'reference' | null
     label?: string | null
@@ -127,7 +128,7 @@ const CardBlock: React.FC<{ card: Card; locale?: Locale; showHeadingBelow: boole
           {card.body}
         </p>
       )}
-      {card.link && (card.link.label || card.link.url) && (
+      {card.enableCta && card.link && (card.link.label || card.link.url) && (
         <div>
           <CMSLink {...card.link} locale={locale} appearance="default" size="lg" />
         </div>

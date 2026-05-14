@@ -1,0 +1,151 @@
+import { RequiredDataFromCollectionSlug } from 'payload'
+
+export const cateringInquiryForm: RequiredDataFromCollectionSlug<'forms'> = {
+  title: 'Catering Inquiry Form',
+  submitButtonLabel: 'Send inquiry',
+  confirmationType: 'message',
+  confirmationMessage: {
+    root: {
+      type: 'root',
+      direction: 'ltr',
+      format: '',
+      indent: 0,
+      version: 1,
+      children: [
+        {
+          type: 'heading',
+          tag: 'h2',
+          direction: 'ltr',
+          format: '',
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              type: 'text',
+              detail: 0,
+              format: 0,
+              mode: 'normal',
+              style: '',
+              text: 'Thanks — your catering inquiry has been received.',
+              version: 1,
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          direction: 'ltr',
+          format: '',
+          indent: 0,
+          version: 1,
+          textFormat: 0,
+          children: [
+            {
+              type: 'text',
+              detail: 0,
+              format: 0,
+              mode: 'normal',
+              style: '',
+              text: 'A member of our catering team will reach out within 2 business days to confirm your order.',
+              version: 1,
+            },
+          ],
+        },
+      ],
+    },
+  },
+  emails: [
+    {
+      emailFrom: '"Tim Hortons Catering" <catering@timhortons.example>',
+      emailTo: '{{email}}',
+      subject: 'We received your Tim Hortons catering inquiry',
+      message: {
+        root: {
+          type: 'root',
+          direction: 'ltr',
+          format: '',
+          indent: 0,
+          version: 1,
+          children: [
+            {
+              type: 'paragraph',
+              direction: 'ltr',
+              format: '',
+              indent: 0,
+              version: 1,
+              textFormat: 0,
+              children: [
+                {
+                  type: 'text',
+                  detail: 0,
+                  format: 0,
+                  mode: 'normal',
+                  style: '',
+                  text: 'Thanks for choosing Tim Hortons for your catering needs. We will be in touch shortly.',
+                  version: 1,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  ],
+  fields: [
+    {
+      name: 'full-name',
+      blockName: 'full-name',
+      blockType: 'text',
+      label: 'Full name',
+      required: true,
+      width: 100,
+    },
+    {
+      name: 'company',
+      blockName: 'company',
+      blockType: 'text',
+      label: 'Company / organization',
+      required: false,
+      width: 100,
+    },
+    {
+      name: 'email',
+      blockName: 'email',
+      blockType: 'email',
+      label: 'Email',
+      required: true,
+      width: 50,
+    },
+    {
+      name: 'phone',
+      blockName: 'phone',
+      blockType: 'number',
+      label: 'Phone',
+      required: true,
+      width: 50,
+    },
+    {
+      name: 'event-date',
+      blockName: 'event-date',
+      blockType: 'text',
+      label: 'Event date',
+      required: true,
+      width: 50,
+    },
+    {
+      name: 'guest-count',
+      blockName: 'guest-count',
+      blockType: 'number',
+      label: 'Approximate guest count',
+      required: true,
+      width: 50,
+    },
+    {
+      name: 'message',
+      blockName: 'message',
+      blockType: 'textarea',
+      label: 'Tell us about your order',
+      required: false,
+      width: 100,
+    },
+  ],
+}

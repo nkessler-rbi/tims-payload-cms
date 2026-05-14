@@ -13,9 +13,21 @@ import { CallToAction } from './CallToAction/config'
 import { CallToActionBlock } from './CallToAction/Component'
 import { callToActionSampleData } from './CallToAction/sampleData'
 
+import { CardGridBlock } from './CardGrid/config'
+import { CardGridBlockComponent } from './CardGrid/Component'
+import { cardGridSampleData } from './CardGrid/sampleData'
+
 import { DoubleImageBlock } from './DoubleImage/config'
 import { DoubleImageBlockComponent } from './DoubleImage/Component'
 import { doubleImageSampleData } from './DoubleImage/sampleData'
+
+import { FormBlock as FormBlockConfig } from './Form/config'
+import { FormBlock as FormBlockComponent } from './Form/Component'
+import { formBlockSampleData } from './Form/sampleData'
+
+import { HeroBannerBlock } from './HeroBanner/config'
+import { HeroBannerBlockComponent } from './HeroBanner/Component'
+import { heroBannerSampleData } from './HeroBanner/sampleData'
 
 import { ImageBlock } from './ImageBlock/config'
 import { ImageBlockComponent } from './ImageBlock/Component'
@@ -28,6 +40,10 @@ import { pageHeaderSampleData } from './PageHeader/sampleData'
 import { RichTextBlock } from './RichTextBlock/config'
 import { RichTextBlockComponent } from './RichTextBlock/Component'
 import { richTextSampleData } from './RichTextBlock/sampleData'
+
+import { StepsBlock } from './Steps/config'
+import { StepsBlockComponent } from './Steps/Component'
+import { stepsSampleData } from './Steps/sampleData'
 
 import { TextWithImageBlock } from './TextWithImage/config'
 import { TextWithImageBlockComponent } from './TextWithImage/Component'
@@ -51,6 +67,13 @@ export type BlockEntry = {
  * will all pick it up automatically — no other edits required.
  */
 export const blockRegistry: BlockEntry[] = [
+  {
+    block: HeroBannerBlock,
+    Component: HeroBannerBlockComponent,
+    label: 'Hero Banner',
+    description: 'A full-width hero with background image, title, subtitle and up to 2 CTAs.',
+    sampleData: heroBannerSampleData,
+  },
   {
     block: PageHeaderBlock,
     Component: PageHeaderBlockComponent,
@@ -80,6 +103,20 @@ export const blockRegistry: BlockEntry[] = [
     sampleData: doubleImageSampleData,
   },
   {
+    block: CardGridBlock,
+    Component: CardGridBlockComponent,
+    label: 'Card Grid',
+    description: 'A 2/3/4-column grid of cards with image, heading, body and optional link.',
+    sampleData: cardGridSampleData,
+  },
+  {
+    block: StepsBlock,
+    Component: StepsBlockComponent,
+    label: 'Steps',
+    description: 'A numbered list of steps for "how it works" sections.',
+    sampleData: stepsSampleData,
+  },
+  {
     block: RichTextBlock,
     Component: RichTextBlockComponent,
     label: 'Rich Text',
@@ -106,6 +143,13 @@ export const blockRegistry: BlockEntry[] = [
     label: 'Accordion',
     description: 'A list of collapsible question/answer items. Great for FAQs.',
     sampleData: accordionSampleData,
+  },
+  {
+    block: FormBlockConfig,
+    Component: FormBlockComponent,
+    label: 'Form',
+    description: 'Embeds a form from the Forms collection (lead capture, account requests, etc.).',
+    sampleData: formBlockSampleData,
   },
 ]
 

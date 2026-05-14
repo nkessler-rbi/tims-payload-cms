@@ -4,12 +4,30 @@ import { anchorIdField } from '@/blocks/_shared/anchorId'
 import { link } from '@/fields/link'
 
 const cardFields: Field[] = [
-  { name: 'image', type: 'upload', relationTo: 'media', required: true },
+  {
+    name: 'image',
+    type: 'upload',
+    relationTo: 'media',
+    admin: {
+      description:
+        'Optional. When omitted, the card renders as a coloured "commitment" panel with the heading as its content.',
+    },
+  },
   { name: 'heading', type: 'text', required: true },
   { name: 'body', type: 'textarea' },
+  {
+    name: 'enableCta',
+    type: 'checkbox',
+    label: 'Add a call-to-action link',
+  },
   link({
     appearances: false,
-    overrides: { admin: { description: 'CTA link shown under the card.' } },
+    overrides: {
+      admin: {
+        description: 'CTA link shown under the card.',
+        condition: (_, sibling) => Boolean(sibling?.enableCta),
+      },
+    },
   }),
 ]
 
