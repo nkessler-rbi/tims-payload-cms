@@ -73,7 +73,7 @@ export default async function BlockDetail({ params: paramsPromise }: Args) {
     <main className="container mx-auto py-12">
       <nav className="text-sm mb-6">
         <Link href={`/${locale}/blocks`} className="text-muted-foreground hover:underline">
-          {locale === 'fr' ? 'Bibliothèque de blocs' : 'Block Library'}
+          {locale === 'fr' ? 'Système de design' : 'Design System'}
         </Link>
         <span className="mx-2 text-muted-foreground">/</span>
         <span>{entry.label}</span>
@@ -110,5 +110,5 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const { blockSlug } = await paramsPromise
   const entry = blockRegistryByLibrarySlug[blockSlug]
   if (!entry) return {}
-  return { title: `${entry.label} – Block Library` }
+  return { title: `${entry.label} – Design System` }
 }

@@ -8,18 +8,18 @@ import { designSystemRegistry } from '@/design-system/registry'
 import { isValidLocale } from '@/utilities/locale'
 
 const ROUTE_TITLE = {
-  en: 'Block Library',
-  fr: 'Bibliothèque de blocs',
-}
-
-const DESIGN_SYSTEM_TITLE = {
   en: 'Design System',
   fr: 'Système de design',
 }
 
-const DESIGN_SYSTEM_INTRO = {
-  en: 'Tokens and rationale that all blocks above derive from. Authored in DESIGN.md, rendered live here.',
-  fr: 'Tokens et rationnel dont s’inspirent tous les blocs ci-dessus. Rédigés dans DESIGN.md, rendus en direct ici.',
+const DESIGN_LANGUAGE_TITLE = {
+  en: 'Design Language',
+  fr: 'Langage de design',
+}
+
+const DESIGN_LANGUAGE_INTRO = {
+  en: 'Tokens and rationale that every block below derives from. Authored in DESIGN.md, rendered live here.',
+  fr: 'Tokens et rationnel dont s’inspirent tous les blocs ci-dessous. Rédigés dans DESIGN.md, rendus en direct ici.',
 }
 
 type Args = {
@@ -38,21 +38,21 @@ export default async function BlockLibrary({ params: paramsPromise }: Args) {
           {ROUTE_TITLE[locale]}
         </p>
         <h1 className="text-4xl md:text-5xl font-bold mt-2">
-          {locale === 'fr' ? 'Tous les blocs disponibles' : 'All available blocks'}
+          {locale === 'fr' ? 'Le système de design Tim Hortons' : 'The Tim Hortons design system'}
         </h1>
         <p className="mt-3 text-muted-foreground max-w-2xl">
           {locale === 'fr'
-            ? 'Chaque bloc enregistré dans le CMS est répertorié ici, avec un aperçu en direct et la liste de ses champs.'
-            : 'Every block registered in the CMS appears here, with a live preview and its field schema.'}
+            ? 'La couche fondamentale (langage visuel) et les blocs de mise en page construits par-dessus — avec un aperçu en direct et le schéma des champs.'
+            : 'The foundational layer (design language) and the layout blocks built on top of it — with live previews and field schemas.'}
         </p>
       </header>
 
       <section className="mb-16">
         <div className="mb-6 flex items-baseline justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold">{DESIGN_SYSTEM_TITLE[locale]}</h2>
+            <h2 className="text-2xl font-semibold">{DESIGN_LANGUAGE_TITLE[locale]}</h2>
             <p className="mt-1 text-sm text-muted-foreground max-w-2xl">
-              {DESIGN_SYSTEM_INTRO[locale]}
+              {DESIGN_LANGUAGE_INTRO[locale]}
             </p>
           </div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground shrink-0">

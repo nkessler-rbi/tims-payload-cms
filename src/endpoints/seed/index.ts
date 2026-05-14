@@ -324,7 +324,7 @@ export const seed = async ({
             link: { type: 'custom', url: '/en/static-pages' },
           },
           {
-            label: 'Block Library',
+            label: 'Design System',
             link: { type: 'custom', url: '/en/blocks' },
           },
         ],

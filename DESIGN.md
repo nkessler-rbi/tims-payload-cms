@@ -92,6 +92,41 @@ components:
 
 # Tim Hortons Design System
 
+## How to Use
+
+This design system has **two sources of truth** that must stay in lockstep: this DESIGN.md file (rationale + machine-readable tokens) and the runtime CSS (`src/app/(frontend)/globals.css`, `tailwind.config.mjs`). Drift between them is caught by `pnpm design:lint`, but the lint runs *after* the edit — so the workflow is to update both in the same change, before committing.
+
+There are two flows depending on whether you are **editing an existing token or component**, or **introducing a brand-new one**.
+
+### Edit flow
+
+Use this when you are changing the value of a token already in the system (e.g. tweaking the red, swapping a font weight, adjusting a button radius).
+
+- **Step 1.** Update the token value in [DESIGN.md](DESIGN.md) frontmatter under the matching group (`colors`, `typography`, `spacing`, `rounded`, `components`).
+- **Step 2.** Update the matching CSS variable in [src/app/(frontend)/globals.css](src/app/(frontend)/globals.css) — both the `:root` block (lines 91-149) and the `[data-theme='dark']` block (lines 151-187) if the change affects dark mode.
+- **Step 3.** If the change is typographic, also update the matching declaration in [tailwind.config.mjs](tailwind.config.mjs).
+- **Step 4.** If the existing prose rationale would now be wrong (e.g. you replaced TH red with teal and the Colors section still says "signature crimson"), update the matching prose section in this file so the *why* stays accurate.
+- **Step 5.** Run `pnpm design:lint`. The script compares every DESIGN.md frontmatter value against its runtime counterpart and exits non-zero on drift.
+
+### Introduce flow
+
+Use this when you are adding a net-new color, typography level, spacing unit, shape, or component primitive.
+
+- **Step 1.** Add the new token to [DESIGN.md](DESIGN.md) frontmatter under the correct group.
+- **Step 2.** Add one or two sentences of rationale to the matching prose section in this file. Capture the *why* while it is fresh — what role does this new token play, what does it replace, when should agents use it?
+- **Step 3.** Add the matching runtime declaration: a new CSS variable in [src/app/(frontend)/globals.css](src/app/(frontend)/globals.css) (`:root` + `[data-theme='dark']` if relevant), or a new font/typography rule in [tailwind.config.mjs](tailwind.config.mjs).
+- **Step 4.** If you added a new color, extend the `COLOR_TOKEN_TO_CSS_VAR` map in [scripts/design-md-lint.ts](scripts/design-md-lint.ts) so parity lint covers the new token.
+- **Step 5.** If you added a new component primitive, add it to the live grid in [src/design-system/sections/Components/Component.tsx](src/design-system/sections/Components/Component.tsx) so it shows up on `/blocks/design-system/components`.
+- **Step 6.** Run `pnpm design` (which runs `design:lint` and `design:spec` together).
+
+### Why this order matters
+
+DESIGN.md is authored first because the rationale is easiest to write when the change is fresh in your head. The runtime CSS comes second so the visual result is immediately reviewable. The parity lint runs last and catches drift in either direction — but it only catches *value* drift, not *prose* drift. The prose discipline is on you.
+
+### For agent-driven changes
+
+If a coding agent is about to make any of these changes on your behalf, it must follow [AGENTS.md](AGENTS.md) § *Design-system change protocol* — which requires the agent to **stop and confirm with you before touching the files**, listing exactly which files it intends to update and in what order. If you find yourself reviewing an agent's design edit and it skipped that confirmation, the agent missed its trigger — flag it.
+
 ## Overview
 
 The Tim Hortons UI is built around three brand instincts: **warmth**, **heritage**, and **accessibility**. The page foundation is never pure white — a soft cream (`neutral`) substitutes for it, lending the screen the temperature of a hot beverage on a paper cup. Narrative text is set in deep espresso brown rather than black, which keeps long reading passages from feeling clinical or corporate. Signature TH red is reserved exclusively for the single most important interactive moment on a screen, so that when a user sees it, they always know what to do.

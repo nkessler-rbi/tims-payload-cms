@@ -4,6 +4,7 @@ import { ColorsSection } from './sections/Colors/Component'
 import { ComponentsSection } from './sections/Components/Component'
 import { DosDontsSection } from './sections/DosDonts/Component'
 import { ElevationSection } from './sections/Elevation/Component'
+import { HowToUseSection } from './sections/HowToUse/Component'
 import { LayoutSection } from './sections/Layout/Component'
 import { OverviewSection } from './sections/Overview/Component'
 import { ShapesSection } from './sections/Shapes/Component'
@@ -31,6 +32,14 @@ export type DesignSectionEntry = {
  * The slug values must remain stable since they are baked into URLs.
  */
 export const designSystemRegistry: DesignSectionEntry[] = [
+  {
+    slug: 'how-to-use',
+    label: 'How to Use',
+    labelFr: 'Comment l’utiliser',
+    description: 'The workflow for editing or adding to this design system — and the files to touch.',
+    description_fr: 'Le flux pour modifier ou enrichir ce système de design — et les fichiers à éditer.',
+    Component: HowToUseSection,
+  },
   {
     slug: 'overview',
     label: 'Overview',

@@ -24,11 +24,11 @@ const COPY: Record<Locale, {
     catalogueTitle: 'Static Pages catalogue',
     catalogueDesc:
       'Browse every campaign landing page currently published in the CMS, in either locale.',
-    libraryTitle: 'Block Library',
+    libraryTitle: 'Design System',
     libraryDesc:
-      'See every layout block that authors can drop into a static page, with a live preview and field schema.',
+      'The visual language (tokens, typography, components) and every layout block built on top — with live previews and field schemas.',
     catalogueCta: 'Browse pages',
-    libraryCta: 'Browse blocks',
+    libraryCta: 'Browse the system',
   },
   fr: {
     eyebrow: 'Prototype CMS Tim Hortons',
@@ -38,11 +38,11 @@ const COPY: Record<Locale, {
     catalogueTitle: 'Catalogue des pages statiques',
     catalogueDesc:
       'Parcourez toutes les pages de campagne publiées dans le CMS, en français ou en anglais.',
-    libraryTitle: 'Bibliothèque de blocs',
+    libraryTitle: 'Système de design',
     libraryDesc:
-      'Tous les blocs de mise en page disponibles pour les rédacteurs, avec aperçu en direct et schéma des champs.',
+      'Le langage visuel (tokens, typographie, composants) et tous les blocs de mise en page construits par-dessus — avec aperçus en direct et schémas des champs.',
     catalogueCta: 'Voir les pages',
-    libraryCta: 'Voir les blocs',
+    libraryCta: 'Voir le système',
   },
 }
 

@@ -39,11 +39,11 @@ export default async function DesignSystemSectionPage({ params: paramsPromise }:
     <main className="container mx-auto py-12">
       <nav className="text-sm mb-6">
         <Link href={`/${locale}/blocks`} className="text-muted-foreground hover:underline">
-          {locale === 'fr' ? 'Bibliothèque de blocs' : 'Block Library'}
+          {locale === 'fr' ? 'Système de design' : 'Design System'}
         </Link>
         <span className="mx-2 text-muted-foreground">/</span>
         <span className="text-muted-foreground">
-          {locale === 'fr' ? 'Système de design' : 'Design System'}
+          {locale === 'fr' ? 'Langage de design' : 'Design Language'}
         </span>
         <span className="mx-2 text-muted-foreground">/</span>
         <span>{label}</span>
@@ -63,7 +63,7 @@ export default async function DesignSystemSectionPage({ params: paramsPromise }:
 
       <nav className="mt-16 border-t border-border pt-6 text-sm">
         <Link href={`/${locale}/blocks`} className="text-muted-foreground hover:underline">
-          ← {locale === 'fr' ? 'Retour à la bibliothèque' : 'Back to the library'}
+          ← {locale === 'fr' ? 'Retour au système de design' : 'Back to the design system'}
         </Link>
       </nav>
     </main>
