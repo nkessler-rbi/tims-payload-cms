@@ -74,7 +74,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-8 pb-24">
+    <article className="pb-24">
       <PageClient />
       <PayloadRedirects disableNotFound url={url} />
 
