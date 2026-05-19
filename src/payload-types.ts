@@ -201,7 +201,20 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | HeroBannerBlock
+    | PageHeaderBlock
+    | AnchorLinksBlock
+    | TextWithImageBlock
+    | DoubleImageBlock
+    | CardGridBlock
+    | StepsBlock
+    | RichTextBlock
+    | ImageBlock
+    | CallToActionBlock
+    | AccordionBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -441,6 +454,349 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBannerBlock".
+ */
+export interface HeroBannerBlock {
+  /**
+   * Full-width background image. Use a wide, high-contrast photo.
+   */
+  backgroundImage: number | Media;
+  /**
+   * Optional small label shown above the title.
+   */
+  eyebrow?: string | null;
+  /**
+   * Main h1 heading.
+   */
+  title: string;
+  /**
+   * Optional supporting copy beneath the title.
+   */
+  subtitle?: string | null;
+  alignment?: ('left' | 'center') | null;
+  /**
+   * Up to 2 call-to-action buttons.
+   */
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlock".
+ */
+export interface PageHeaderBlock {
+  /**
+   * Optional small text shown above the title.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Optional secondary line shown below the title.
+   */
+  subtitle?: string | null;
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pageHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AnchorLinksBlock".
+ */
+export interface AnchorLinksBlock {
+  items: {
+    label: string;
+    /**
+     * The anchor id of another block on this page (without the # prefix), e.g. "hockey".
+     */
+    targetAnchorId: string;
+    id?: string | null;
+  }[];
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'anchorLinks';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithImageBlock".
+ */
+export interface TextWithImageBlock {
+  mediaPosition: 'right' | 'left';
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  media: number | Media;
+  enableCta?: boolean | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textWithImage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DoubleImageBlock".
+ */
+export interface DoubleImageBlock {
+  card1: {
+    /**
+     * Optional. When omitted, the card renders as a coloured "commitment" panel with the heading as its content.
+     */
+    image?: (number | null) | Media;
+    heading: string;
+    body?: string | null;
+    enableCta?: boolean | null;
+    /**
+     * CTA link shown under the card.
+     */
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  card2: {
+    /**
+     * Optional. When omitted, the card renders as a coloured "commitment" panel with the heading as its content.
+     */
+    image?: (number | null) | Media;
+    heading: string;
+    body?: string | null;
+    enableCta?: boolean | null;
+    /**
+     * CTA link shown under the card.
+     */
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'doubleImage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock".
+ */
+export interface CardGridBlock {
+  /**
+   * Optional section heading.
+   */
+  heading?: string | null;
+  /**
+   * Optional short copy under the heading.
+   */
+  description?: string | null;
+  columns: '2' | '3' | '4';
+  items: {
+    /**
+     * Optional. Square or 4:3 crops work best.
+     */
+    image?: (number | null) | Media;
+    heading: string;
+    body?: string | null;
+    enableCta?: boolean | null;
+    /**
+     * CTA link rendered under the card.
+     */
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: number | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: number | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[];
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  /**
+   * Optional small label above the heading.
+   */
+  eyebrow?: string | null;
+  /**
+   * Optional section heading shown above the numbered steps.
+   */
+  heading?: string | null;
+  items: {
+    title: string;
+    body?: string | null;
+    id?: string | null;
+  }[];
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock".
+ */
+export interface ImageBlock {
+  media: number | Media;
+  /**
+   * Optional caption shown below the image.
+   */
+  caption?: string | null;
+  /**
+   * Optional override for the alt text on this page.
+   */
+  altOverride?: string | null;
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
@@ -483,103 +839,49 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlock".
+ * via the `definition` "AccordionBlock".
  */
-export interface ContentBlock {
-  columns?:
-    | {
-        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+export interface AccordionBlock {
+  /**
+   * Optional heading shown above the accordion.
+   */
+  heading?: string | null;
+  items: {
+    question: string;
+    answer: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'content';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
- */
-export interface MediaBlock {
-  media: number | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock".
- */
-export interface ArchiveBlock {
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+      };
+      [k: string]: unknown;
     };
-    [k: string]: unknown;
-  } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
-  categories?: (number | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: number | Post;
-      }[]
-    | null;
+    id?: string | null;
+  }[];
+  /**
+   * Optional. Set an id (e.g. "hockey") so an Anchor Links block can scroll to this section.
+   */
+  anchorId?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'archive';
+  blockType: 'accordion';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1084,10 +1386,17 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        heroBanner?: T | HeroBannerBlockSelect<T>;
+        pageHeader?: T | PageHeaderBlockSelect<T>;
+        anchorLinks?: T | AnchorLinksBlockSelect<T>;
+        textWithImage?: T | TextWithImageBlockSelect<T>;
+        doubleImage?: T | DoubleImageBlockSelect<T>;
+        cardGrid?: T | CardGridBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        richTextBlock?: T | RichTextBlockSelect<T>;
+        imageBlock?: T | ImageBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
+        accordion?: T | AccordionBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
@@ -1103,6 +1412,199 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBannerBlock_select".
+ */
+export interface HeroBannerBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  eyebrow?: T;
+  title?: T;
+  subtitle?: T;
+  alignment?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlock_select".
+ */
+export interface PageHeaderBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  subtitle?: T;
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AnchorLinksBlock_select".
+ */
+export interface AnchorLinksBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        targetAnchorId?: T;
+        id?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithImageBlock_select".
+ */
+export interface TextWithImageBlockSelect<T extends boolean = true> {
+  mediaPosition?: T;
+  richText?: T;
+  media?: T;
+  enableCta?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DoubleImageBlock_select".
+ */
+export interface DoubleImageBlockSelect<T extends boolean = true> {
+  card1?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        body?: T;
+        enableCta?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+      };
+  card2?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        body?: T;
+        enableCta?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock_select".
+ */
+export interface CardGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  columns?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        body?: T;
+        enableCta?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  richText?: T;
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock_select".
+ */
+export interface ImageBlockSelect<T extends boolean = true> {
+  media?: T;
+  caption?: T;
+  altOverride?: T;
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1125,55 +1627,24 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  anchorId?: T;
   id?: T;
   blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlock_select".
+ * via the `definition` "AccordionBlock_select".
  */
-export interface ContentBlockSelect<T extends boolean = true> {
-  columns?:
+export interface AccordionBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
     | T
     | {
-        size?: T;
-        richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
+        question?: T;
+        answer?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock_select".
- */
-export interface MediaBlockSelect<T extends boolean = true> {
-  media?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock_select".
- */
-export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
+  anchorId?: T;
   id?: T;
   blockName?: T;
 }
@@ -1637,9 +2108,18 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
+  /**
+   * Top-level navbar entries. If "Children" has items, this entry renders as a dropdown.
+   */
   navItems?:
     | {
+        /**
+         * Text shown in the top-level navbar.
+         */
         label: string;
+        /**
+         * Where this top-level entry links to. Hidden when children are present (then this entry acts as a dropdown parent).
+         */
         link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
@@ -1654,6 +2134,9 @@ export interface Header {
               } | null);
           url?: string | null;
         };
+        /**
+         * Optional. When present, the top-level entry becomes a dropdown.
+         */
         children?:
           | {
               link: {
@@ -1836,6 +2319,16 @@ export interface CodeBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'code';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: number | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
