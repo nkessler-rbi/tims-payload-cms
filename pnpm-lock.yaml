@@ -83,6 +83,9 @@ importers:
       payload:
         specifier: 3.84.1
         version: 3.84.1(graphql@16.14.0)(typescript@5.7.3)
+      pg:
+        specifier: ^8.21.0
+        version: 8.21.0
       prism-react-renderer:
         specifier: ^2.3.1
         version: 2.4.1(react@19.2.4)
@@ -126,6 +129,9 @@ importers:
       '@types/node':
         specifier: 22.19.9
         version: 22.19.9
+      '@types/pg':
+        specifier: ^8.20.0
+        version: 8.20.0
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
