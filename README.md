@@ -298,6 +298,9 @@ Before deploying your app, you need to:
 
 You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
 
+### URL
+https://duhgjbqx3d4io.cloudfront.net/
+
 ### How to make a code update
 
 1. Push to git
