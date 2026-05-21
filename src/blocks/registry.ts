@@ -9,6 +9,10 @@ import { AnchorLinksBlock } from './AnchorLinks/config'
 import { AnchorLinksBlockComponent } from './AnchorLinks/Component'
 import { anchorLinksSampleData } from './AnchorLinks/sampleData'
 
+import { ButtonBlock } from './ButtonBlock/config'
+import { ButtonBlockComponent } from './ButtonBlock/Component'
+import { buttonBlockSampleData } from './ButtonBlock/sampleData'
+
 import { CallToAction } from './CallToAction/config'
 import { CallToActionBlock } from './CallToAction/Component'
 import { callToActionSampleData } from './CallToAction/sampleData'
@@ -136,6 +140,13 @@ export const blockRegistry: BlockEntry[] = [
     label: 'Call to Action',
     description: 'A boxed call-to-action with rich text and one or two CTA buttons.',
     sampleData: callToActionSampleData,
+  },
+  {
+    block: ButtonBlock,
+    Component: ButtonBlockComponent,
+    label: 'Button',
+    description: 'A single button with selectable variant, size, and link target.',
+    sampleData: buttonBlockSampleData,
   },
   {
     block: AccordionBlock,

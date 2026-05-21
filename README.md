@@ -303,10 +303,60 @@ https://duhgjbqx3d4io.cloudfront.net/
 
 ### How to make a code update
 
+There are two kinds of changes to think about when deploying:
+
+- **Code-only changes** (React components, styles, hooks, utilities, copy edits) — no database impact. Just rebuild and restart.
+- **Schema changes** (new Payload blocks, new collections, new/renamed/removed fields on existing collections) — these change the Postgres schema. They need a migration generated locally, committed alongside the code, and applied on AWS before the new app starts.
+
+#### Code-only deploys
+
 1. Push to git
-2. Pull from terminal (AWS)
-3. `PORT=3001 pnpm build`
-4. `pm2 restart tims-payload-cms --update-env`
+2. Pull from terminal (AWS): `git pull`
+3. `pnpm install --frozen-lockfile` (only if `package.json` / lockfile changed)
+4. `PORT=3001 pnpm build`
+5. `pm2 restart tims-payload-cms --update-env`
+
+#### Schema-change deploys
+
+Before pushing, generate the migration **locally**:
+
+1. Make the config change (e.g., add a new block under `src/blocks/`, wire it into a collection's `blocks` field).
+2. `pnpm generate:types` — regenerates `src/payload-types.ts` so any block Components that import the new interface (e.g., `import type { ButtonBlock } from '@/payload-types'`) will type-check.
+3. `pnpm payload migrate:create <descriptive-name>` — Payload diffs the current schema against your TS config and writes `src/migrations/<timestamp>_<name>.ts` + `.json` and updates `src/migrations/index.ts`.
+4. Restart `pnpm dev` to apply the migration locally and confirm the change works in the admin UI.
+5. Commit the config change, the updated `src/payload-types.ts`, and the generated migration files together in the same commit.
+
+Then on AWS:
+
+1. `git pull`
+2. `pnpm install --frozen-lockfile`
+3. `pnpm payload migrate` — applies any pending migrations against the remote DB. **Must run before the build/restart**, so the schema matches the code about to be served.
+4. `PORT=3001 pnpm build`
+5. `pm2 restart tims-payload-cms --update-env`
+
+Chain with `&&` so the deploy aborts if migrate fails (pm2 will keep serving the old code against the still-matching old schema):
+
+```bash
+git pull && \
+pnpm install --frozen-lockfile && \
+pnpm payload migrate && \
+PORT=3001 pnpm build && \
+pm2 restart tims-payload-cms --update-env
+```
+
+#### Context: how the schema sync works
+
+- **Local development uses `push: true`** (auto-sync from TS config to DB). This is gated on `NODE_ENV !== 'production'` in `src/payload.config.ts`, so it only runs locally.
+- **Production uses `push: false`** (the gate). On AWS, the schema is only changed by migrations — the running app will never modify the DB on its own.
+- **Payload tracks which migrations have run** in the `payload_migrations` table on the remote DB. `pnpm payload migrate:status` shows what's pending vs. applied.
+- **You don't need to run `pnpm payload migrate` locally** — `push: true` keeps your local DB in sync automatically. Migrations are generated locally but executed only on AWS.
+
+#### Gotchas
+
+- **Renaming a field** with existing content: Payload's auto-generated migration drops the old column and adds the new one, which loses the data. Hand-edit the generated migration to use `ALTER TABLE ... RENAME COLUMN` instead.
+- **New required field on an existing collection**: if remote already has rows, a `NOT NULL` add without a default will fail. Give it a default, make it optional, or add a backfill step in the migration.
+- **Removing a block type** that's been used in remote content: the migration will try to drop the table and fail (or silently lose data). Clean up the content on the remote admin first, then deploy the removal.
+- **Always review the generated SQL** in `src/migrations/<timestamp>_<name>.ts` before committing — Payload's diff is usually right but not always, especially around relations, indexes, and enum changes.
 
 ## Questions
 
