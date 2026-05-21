@@ -298,6 +298,13 @@ Before deploying your app, you need to:
 
 You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
 
+### How to make a code update
+
+1. Push to git
+2. Pull from terminal (AWS)
+3. `PORT=3001 pnpm build`
+4. `pm2 restart tims-payload-cms --update-env`
+
 ## Questions
 
 If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
